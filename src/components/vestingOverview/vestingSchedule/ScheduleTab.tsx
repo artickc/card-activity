@@ -57,7 +57,7 @@ const columns = [
             </>
         ),
     }),
-    columnHelper.accessor('releasedAmount', {
+    columnHelper.accessor('withdrawnAmount', {
         header: 'WITHDRAWN',
         cell: (info) => (
             <>
@@ -66,7 +66,7 @@ const columns = [
                 </span>
                 <TabProgressBar
                     completed={
-                        (info.row.original.releasedAmount * 100) /
+                        (info.row.original.withdrawnAmount * 100) /
                         info.row.original.allocatedAmount
                     }
                 />

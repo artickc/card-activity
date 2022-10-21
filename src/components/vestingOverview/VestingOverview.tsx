@@ -1,62 +1,48 @@
-import { IVestingScheduleFromResponse } from '../../interfaces/vestingSchedule.interface';
+import { useContext, useEffect, useState } from 'react';
+import { JsonRpcProvider } from '@ethersproject/providers';
+import { WalletConnectContext } from '../../context';
+import { useBeneficiaryOverview } from '../../hooks/use-beneficiary-overview';
+import { IVestingSchedule } from '../../interfaces/vestingSchedule.interface';
 import { formatVestingScheduleData } from '../../utils/formatVestingScheduleData';
 import { VestingSchedule } from './vestingSchedule/VestingSchedule';
 import { Withdraw } from './withdraw/Withdraw';
-
-const mockedVestingScheduleResponse = [
-    {
-        name: 'Seed B',
-        terms: 86400,
-        cliff: 0,
-        duration: 1036800,
-        totalAmount: 0,
-        allocatedAmount: 0,
-        releasedAmount: 0,
-        initialized: true,
-        revoked: false,
-    },
-    {
-        name: 'Seed A',
-        terms: 86400,
-        cliff: 86400,
-        duration: 86400,
-        totalAmount: 0,
-        allocatedAmount: 0,
-        releasedAmount: 0,
-        initialized: true,
-        revoked: false,
-    },
-];
-
-const mockedBeneficiaries = {
-    ['Seed A']: {
-        allocatedAmount: 2400,
-        releasedAmount: 0,
-    },
-    ['Seed B']: {
-        allocatedAmount: 1200,
-        releasedAmount: 0,
-    },
-};
+import { IBeneficiaryOverview } from '../../interfaces/beneficiaryOverview.interface';
 
 export const VestingOverview = () => {
-    const data = mockedVestingScheduleResponse.map(
-        (vestingSchedule: IVestingScheduleFromResponse) => {
-            const beneficiary =
-                vestingSchedule.name === 'Seed A'
-                    ? mockedBeneficiaries['Seed A']
-                    : mockedBeneficiaries['Seed B'];
-            return formatVestingScheduleData(vestingSchedule, beneficiary);
-        },
-    );
+    const { account, library } = useContext(WalletConnectContext);
+    const [vestingSchedules, setVestingSchedules] = useState<
+        IVestingSchedule[]
+    >([]);
+    const { getBeneficiaryOverview } = useBeneficiaryOverview();
+
+    useEffect(() => {
+        const fetchData = async (library: JsonRpcProvider, account: string) => {
+            const beneficiaryOverview = await getBeneficiaryOverview(
+                library,
+                account,
+            );
+
+            console.log(beneficiaryOverview, 'here');
+
+            const vestingSchedules = beneficiaryOverview.map(
+                (el: IBeneficiaryOverview) => formatVestingScheduleData(el),
+            );
+
+            setVestingSchedules(vestingSchedules);
+        };
+
+        if (library && account) {
+            fetchData(library, account).catch(console.error);
+        }
+    }, [library, account]);
 
     return (
         <div className="w-full h-full flex justify-between">
             <div className="w-[77%]">
-                <VestingSchedule data={data} />
+                <VestingSchedule data={vestingSchedules} />
             </div>
             <div className="w-[21%]">
-                <Withdraw data={data} />
+                <Withdraw data={vestingSchedules} />
             </div>
         </div>
     );

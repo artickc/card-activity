@@ -8,19 +8,7 @@ export interface IVestingSchedule {
     vestingRate: number;
     vestingRateAsString: string;
     allocatedAmount: number;
-    releasedAmount: number;
+    withdrawnAmount: number;
     unlockedAmount: number;
     isUnlocked: boolean;
-}
-
-export interface IVestingScheduleFromResponse {
-    name: string;
-    terms: number;
-    cliff: number;
-    duration: number;
-    totalAmount: number;
-    allocatedAmount: number;
-    releasedAmount: number;
-    initialized: boolean;
-    revoked: boolean;
 }

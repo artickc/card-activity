@@ -21,7 +21,7 @@ export const Withdraw = ({ data }: Props) => {
         });
         setTotalLocked(locked);
         setTotalUnlocked(unlocked);
-    }, []);
+    }, [data]);
 
     const withdraw = () => {
         console.log('withdraw');
