@@ -6,6 +6,7 @@ import { GradientButtonWithIcon } from '../button/gradient/GradientButtonWithIco
 import { IBeneficiaryOverview } from '../../interfaces/beneficiaryOverview.interface';
 import { IVestingSchedule } from '../../interfaces/vestingSchedule.interface';
 import { JsonRpcProvider } from '@ethersproject/providers';
+import { ProgressChart } from './progressChart/ProgressChart';
 import { REFRESH_LAKE_PRICE_INTERVAL } from '../../constants/commons';
 import { WalletConnectContext } from '../../context';
 import checkedIcon from '../../assets/icons/checked-icon.svg';
@@ -34,6 +35,7 @@ export const AccountOverview = () => {
     const [lakePrice, setLakePrice] = useState(0);
     const [totalLocked, setTotalLocked] = useState(0);
     const [totalUnlocked, setTotalUnlocked] = useState(0);
+    const [totalAllocated, setTotalAllocated] = useState(0);
     const [vestingSchedules, setVestingSchedules] = useState<
         IVestingSchedule[]
     >([]);
@@ -84,12 +86,15 @@ export const AccountOverview = () => {
     useEffect(() => {
         let locked = 0;
         let unlocked = 0;
+        let allocated = 0;
         vestingSchedules.map((el) => {
             locked = locked + el.allocatedAmount - el.unlockedAmount;
             unlocked = unlocked + el.unlockedAmount - el.withdrawnAmount;
+            allocated = allocated + el.allocatedAmount;
         });
         setTotalLocked(locked);
         setTotalUnlocked(unlocked);
+        setTotalAllocated(allocated);
     }, [vestingSchedules]);
 
     const setBalances = () => {
@@ -123,8 +128,11 @@ export const AccountOverview = () => {
                     YOUR ACCOUNT
                 </div>
                 <StatContainer>
-                    <div className="w-1/2 mx-2 flex items-center justify-center">
-                        PIE CHART
+                    <div className="w-1/2 h-full mx-4 flex justify-center pl-2 pt-10">
+                        <ProgressChart
+                            unlocked={(totalUnlocked * 100) / totalAllocated}
+                            locked={(totalLocked * 100) / totalAllocated}
+                        />
                     </div>
                     <div className="w-1/2 h-full flex flex-col mx-4 py-4 justify-between">
                         <AccountMetric
@@ -160,8 +168,11 @@ export const AccountOverview = () => {
                                     alt="icon"
                                 ></img>
                             }
-                            value={lakeBalance}
-                            usdValue={lakeBalance * lakePrice}
+                            value={totalLocked + totalUnlocked + lakeBalance}
+                            usdValue={
+                                (totalLocked + totalUnlocked + lakeBalance) *
+                                lakePrice
+                            }
                         />
                         <AccountMetric
                             title={'LP TOKENS AVAILABLE'}

@@ -21,7 +21,7 @@ export const AccountMetric = ({
             <div className="flex items-center justify-center px-4">{icon}</div>
             <div className="w-full flex items-center justify-between">
                 <span
-                    className={`max-w-[5.5rem] whitespace-wrap text-sm tracking-[.1em] text-center ${fontColor}`}
+                    className={`max-w-[5.5rem] whitespace-wrap text-sm tracking-[.1em] text-center ${fontColor} mr-2`}
                 >
                     {title}
                 </span>
@@ -30,22 +30,14 @@ export const AccountMetric = ({
                         <div className="flex items-end">
                             <span
                                 className={`${
-                                    value >= 10 ** 8
-                                        ? 'text-base'
-                                        : value >= 10 ** 6
-                                        ? 'text-xl'
-                                        : 'text-3xl'
+                                    value >= 10 ** 6 ? 'text-base' : 'text-3xl'
                                 } tracking-[.1em] color-gradient`}
                             >
                                 {formatValue(Math.trunc(value), '', 0)}
                             </span>
                             <span
                                 className={`${
-                                    value >= 10 ** 8
-                                        ? 'text-xs'
-                                        : value >= 10 ** 6
-                                        ? 'text-sm'
-                                        : 'text-base'
+                                    value >= 10 ** 6 ? 'text-xs' : 'text-base'
                                 } tracking-[.1em] color-gradient`}
                             >
                                 {Math.abs(value - Math.trunc(value))
