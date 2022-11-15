@@ -151,6 +151,7 @@ export const ProvideLiquidityWidget = () => {
                 </span>
                 <StakingModal
                     isOpen={isStakingModalOpen}
+                    lpTokenBalance={lpTokenBalance}
                     closeModal={closeStakingModal}
                     refreshStakingData={() => {
                         setRefreshStakingData(new Date().getTime());

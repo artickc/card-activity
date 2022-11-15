@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { ASSET_LP_TOKEN } from '../../../../constants/assets';
 import { Button } from '../../../button/Button';
@@ -7,13 +7,11 @@ import ReactModal from 'react-modal';
 import { TokenInput } from '../TokenInput';
 import { WalletConnectContext } from '../../../../context';
 import cancelIcon from '../../../../assets/icons/cancel-icon.svg';
-import { parseBigNumber } from '../../../../utils/parseBigNumber';
-import { useConfig } from '../../../../hooks/use-config';
 import { useStakeLPTokens } from '../../../../hooks/use-stake-lp-tokens';
-import { useTokenBalance } from '@usedapp/core';
 
 type Props = {
     isOpen: boolean;
+    lpTokenBalance: number;
     refreshStakingData: () => void;
     closeModal: () => void;
 };
@@ -38,27 +36,14 @@ ReactModal.setAppElement('#root');
 
 export const StakingModal = ({
     isOpen,
+    lpTokenBalance,
     refreshStakingData,
     closeModal,
 }: Props) => {
     const { account, library } = useContext(WalletConnectContext);
-    const { lpTokenAddress } = useConfig();
-    const [lpTokenBalance, setLPTokenBalance] = useState(0);
     const [lpTokenInputValue, setLPTokenInputValue] = useState(0);
     const [isLPTokenValueValid, setIsLPTokenValueValid] = useState(true);
     const [isStaking, setIsStaking] = useState(false);
-    const lpTokenBalanceAsBigNumber = useTokenBalance(lpTokenAddress, account);
-
-    useEffect(() => {
-        setLPTokenBalance(
-            lpTokenBalanceAsBigNumber
-                ? parseBigNumber(
-                      lpTokenBalanceAsBigNumber,
-                      ASSET_LP_TOKEN.decimals,
-                  )
-                : 0,
-        );
-    }, [lpTokenBalanceAsBigNumber]);
 
     const onLPTokenValueChange = (value: number) => {
         setLPTokenInputValue(value);
@@ -126,7 +111,7 @@ export const StakingModal = ({
                                     size="medium"
                                     disabled={
                                         lpTokenInputValue === 0 ||
-                                        lpTokenBalance === 0
+                                        !isLPTokenValueValid
                                     }
                                     text="STAKE"
                                     onClick={onStakeClick}
