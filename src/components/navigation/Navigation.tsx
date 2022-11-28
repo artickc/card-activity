@@ -87,22 +87,25 @@ export const Navigation = () => {
                             ></Button>
 
                             <div className="ml-4">
-                                <ButtonWithIcon
-                                    size="big"
-                                    disabled={true}
-                                    text={formatAddress(account)}
-                                >
-                                    <CopyToClipboard text={account}>
+                                <CopyToClipboard text={account}>
+                                    <ButtonWithIcon
+                                        size="big"
+                                        disabled={false}
+                                        text={formatAddress(account)}
+                                    >
                                         <img
                                             className="cursor-pointer"
                                             src={copyIcon}
                                             alt="copy"
                                         ></img>
-                                    </CopyToClipboard>
-                                </ButtonWithIcon>
+                                    </ButtonWithIcon>
+                                </CopyToClipboard>
                             </div>
                             <div className="ml-4">
-                                <button onClick={deactivate}>
+                                <button
+                                    className="hover:scale-105 cursor-pointer transition-transform duration-300"
+                                    onClick={deactivate}
+                                >
                                     <GradientBorder className="p-px flex justify-center items-center rounded-[32px]">
                                         <div className="w-full h-full flex justify-center items-center rounded-[32px] bg-black-500 p-2">
                                             <img

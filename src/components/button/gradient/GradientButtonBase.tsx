@@ -16,11 +16,17 @@ export const GradientButtonBase = ({
     children,
     onClick,
 }: Props) => (
-    <button disabled={disabled} onClick={onClick} className="cursor-pointer">
+    <button
+        disabled={disabled}
+        onClick={onClick}
+        className={`${
+            disabled ? '' : 'hover:scale-105 cursor-pointer'
+        } transition-transform duration-300`}
+    >
         <GradientBackground
             className={`${
                 size === 'small'
-                    ? 'min-w-[12rem] h-[3rem] px-2'
+                    ? 'min-w-[12rem] h-[2.5rem] px-2'
                     : size === 'medium'
                     ? 'min-w-[14rem] h-[3rem] px-6'
                     : size === 'big'
