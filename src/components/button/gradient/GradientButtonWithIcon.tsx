@@ -21,13 +21,13 @@ export const GradientButtonWithIcon = ({
         <div className="w-full flex justify-between">
             {children}
             <span
-                className={`${
+                className={`tracking-[.05em] font-medium font-kanit-medium flex items-center ml-2 ${
                     size === 'small'
                         ? 'text-sm'
                         : size === 'medium'
-                        ? 'text-base font-medium'
+                        ? 'text-base'
                         : 'text-xl'
-                } tracking-wider`}
+                }`}
             >
                 {text}
             </span>

@@ -1,10 +1,10 @@
 import { FadeLoader } from 'react-spinners';
-import { GradientBorderWithNoShadow } from './GradientBorder';
-import { colors } from '../constants/colors';
-import failedTransaction from '../assets/icons/failed-transaction.svg';
-import { networks } from '../constants/networks';
-import successfulTransaction from '../assets/icons/successful-transaction.svg';
-import { useConfig } from '../hooks/use-config';
+import { GradientBorderWithNoShadow } from '../GradientBorder';
+import { colors } from '../../constants/colors';
+import failedTransaction from '../../assets/icons/failed-transaction.svg';
+import { networks } from '../../constants/networks';
+import successfulTransaction from '../../assets/icons/successful-transaction.svg';
+import { useConfig } from '../../hooks/use-config';
 
 export type Status = 'PENDING' | 'SUCCESSFUL' | 'FAILED';
 type Props = {

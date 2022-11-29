@@ -14,6 +14,18 @@
     -webkit-text-fill-color: transparent;
 }
 
+.color-gradient-start {
+    background: linear-gradient(90.21deg, #ec6ca9 11.91%, #9263ed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.color-gradient-end {
+    background: linear-gradient(90.21deg, #9263ed, #7b61ff 91.55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .color-gray-gradient {
     background: linear-gradient(180deg, #d1d1d1 25%, #ffffff 60%);
     -webkit-background-clip: text;
@@ -39,6 +51,11 @@
 
 .inset-shadow {
     box-shadow: inset 0px 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.box-shadow {
+    box-shadow: inset 1px 1px 1px rgba(68, 68, 68, 0.05),
+        inset -1px -1px 4px rgba(134, 134, 134, 0.12), 8px 8px 10px #181818;
 }
 
 .font-kanit-regular {

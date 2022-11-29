@@ -1,8 +1,6 @@
 import { ASSET_USDT } from '../../../constants/assets';
-import { colors } from '../../../constants/colors';
 import { formatValue } from '../../../utils/formatValue';
 import lakeLogo from './../../../assets/icons/lake-logo.svg';
-import styled from 'styled-components';
 import usdtLogo from './../../../assets/icons/usdt-logo.svg';
 
 type Props = {
@@ -26,7 +24,7 @@ export const TokenInput = ({
         setMaxInputValue();
     };
     return (
-        <InputContainer className="w-full h-[7rem] flex justify-between pl-8 pr-2 pt-2 my-4">
+        <div className="w-full h-[7rem] bg-black-600 flex justify-between pl-8 pr-2 pt-2 my-4 box-shadow rounded-[20px]">
             <div className="w-1/4 flex flex-col justify-center items-center mr-4">
                 <span className="text-sm tracking-[.1em] text-gray-300 mb-2 text-center">
                     {tokenSymbol}
@@ -49,11 +47,11 @@ export const TokenInput = ({
                 <div className="flex flex-col items-center mt-2 mr-4">
                     <div className="flex items-center">
                         <input
-                            className="font-kanit-medium color-gradient text-2xl font-bold truncate text-end w-[7rem] mr-2"
+                            className="font-kanit-medium color-gradient-start text-2xl font-bold truncate text-end w-[7rem] mr-2"
                             value={inputValue}
                             onChange={onChange}
                         />
-                        <span className="font-kanit-medium color-gradient text-2xl font-bold">
+                        <span className="font-kanit-medium color-gradient-end text-2xl font-bold">
                             {tokenSymbol}
                         </span>
                     </div>
@@ -69,13 +67,6 @@ export const TokenInput = ({
                     )}
                 </div>
             </div>
-        </InputContainer>
+        </div>
     );
 };
-
-const InputContainer = styled.div`
-    box-shadow: inset 1px 1px 1px rgba(68, 68, 68, 0.05),
-        inset -1px -1px 4px rgba(134, 134, 134, 0.12);
-    border-radius: 20px;
-    background: ${colors.black[600]};
-`;

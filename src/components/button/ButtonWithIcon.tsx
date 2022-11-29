@@ -20,7 +20,15 @@ export const ButtonWithIcon = ({
     <ButtonBase size={size} disabled={disabled} onClick={onClick}>
         <div className="w-full flex justify-between">
             {children}
-            <span className="color-gradient-light tracking-wider text-xl">
+            <span
+                className={`color-gradient-light tracking-[.05em] font-medium font-kanit-medium ml-2 ${
+                    size === 'small'
+                        ? 'text-xs'
+                        : size === 'medium'
+                        ? 'text-base'
+                        : 'text-2xl'
+                }`}
+            >
                 {text}
             </span>
         </div>

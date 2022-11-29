@@ -1,5 +1,5 @@
+import { Button } from '../button/Button';
 import CopyToClipboard from 'react-copy-to-clipboard';
-import { GradientBorder } from '../GradientBorder';
 import { formatAddress } from '../../utils/formatAddress';
 import logo from '../../assets/icons/lake-logo.svg';
 import telegramIcon from '../../assets/icons/telegram-icon.svg';
@@ -20,18 +20,16 @@ export const Footer = () => {
                     CONTRACT ADDRESS
                 </span>
                 <CopyToClipboard text={lakeAddress}>
-                    <GradientBorder className="min-w-[12rem] h-[2.5rem] p-px flex justify-center items-center rounded-[32px] cursor-pointer">
-                        <div className="w-full h-full flex justify-center items-center rounded-[32px] bg-black-500 px-4">
-                            <span className="color-gradient-light tracking-wider text-sm font-medium font-kanit-medium">
-                                {formatAddress(lakeAddress)}
-                            </span>
-                        </div>
-                    </GradientBorder>
+                    <Button
+                        size="small"
+                        disabled={false}
+                        text={formatAddress(lakeAddress)}
+                    ></Button>
                 </CopyToClipboard>
             </div>
             <div className="flex">
                 <img
-                    className="w-[3rem] h-[3rem] mx-4 cursor-pointer"
+                    className="w-[3rem] h-[3rem] mx-4 cursor-pointer hover:scale-105 transition-transform duration-300"
                     src={twitterIcon}
                     alt="twitterIcon"
                     onClick={() =>
@@ -42,7 +40,7 @@ export const Footer = () => {
                     }
                 ></img>
                 <img
-                    className="w-[3rem] h-[3rem] mx-4 cursor-pointer"
+                    className="w-[3rem] h-[3rem] mx-4 cursor-pointer hover:scale-105 transition-transform duration-300"
                     src={telegramIcon}
                     alt="telegramIcon"
                     onClick={() =>
@@ -53,16 +51,10 @@ export const Footer = () => {
                     }
                 ></img>
             </div>
-            <div className="flex flex-col items-center">
-                <span className="tracking-[.1em] text-xl font-kanit-light color-gray-gradient text-shadow my-2 cursor-pointer">
-                    CONTACT US
-                </span>
-                <span className="tracking-[.1em] text-xl font-kanit-light color-gray-gradient text-shadow my-2 cursor-pointer">
-                    PRIVACY POLICY
-                </span>
-                <span className="tracking-[.1em] text-xl font-kanit-light color-gray-gradient text-shadow my-2 cursor-pointer">
-                    DISCLAIMER
-                </span>
+            <div className="flex flex-col items-center tracking-[.1em] text-xl font-kanit-light color-gray-gradient text-shadow">
+                <span className="my-2 cursor-pointer">CONTACT US</span>
+                <span className="my-2 cursor-pointer">PRIVACY POLICY</span>
+                <span className="my-2 cursor-pointer">DISCLAIMER</span>
             </div>
         </div>
     );

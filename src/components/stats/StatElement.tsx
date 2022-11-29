@@ -1,6 +1,4 @@
-import { colors } from '../../constants/colors';
 import downChart from './../../assets/icons/down-chart.svg';
-import styled from 'styled-components';
 import upChart from './../../assets/icons/up-chart.svg';
 
 interface Props {
@@ -16,10 +14,10 @@ export const StatElement = ({
     formattedValue,
     pastValue,
 }: Props) => (
-    <StatElementContainer className="flex justify-between px-8">
-        <div className="min-w-[3rem] flex justify-center items-center mr-4">
+    <div className="w-full h-[4.75rem] flex justify-between px-6 box-shadow rounded-[18px] bg-black-600 overflow-auto">
+        <div className="min-w-[4rem] flex justify-center items-center mr-4">
             <img
-                className="w-[3rem] h-[3rem]"
+                className="w-[4rem] h-[3rem]"
                 src={currentValue < pastValue ? downChart : upChart}
                 alt="chart"
             ></img>
@@ -28,19 +26,9 @@ export const StatElement = ({
             <span className="font-kanit-medium whitespace-nowrap text-gray-700 text-xs font-normal tracking-[.12em]">
                 {title}
             </span>
-            <span className="font-kanit-medium color-gradient text-2xl font-bold">
+            <span className="font-kanit-medium whitespace-nowrap color-gradient text-2xl font-medium">
                 {formattedValue}
             </span>
         </div>
-    </StatElementContainer>
+    </div>
 );
-
-const StatElementContainer = styled.div`
-    box-shadow: inset 1px 1px 1px rgba(68, 68, 68, 0.05),
-        inset -1px -1px 4px rgba(134, 134, 134, 0.12);
-    border-radius: 20px;
-    background: ${colors.black[600]};
-    width: 100%;
-    height: 4.75rem;
-    margin: 0.5rem 0;
-`;

@@ -1,10 +1,8 @@
-import { createGlobalStyle } from 'styled-components';
-
-import { colors } from '../constants/colors';
-
 import KanitLight from '../assets/fonts/Kanit-Light.ttf';
-import KanitRegular from '../assets/fonts/Kanit-Regular.ttf';
 import KanitMedium from '../assets/fonts/Kanit-Medium.ttf';
+import KanitRegular from '../assets/fonts/Kanit-Regular.ttf';
+import { colors } from '../constants/colors';
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -53,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
   body, html {
     margin: 0;
     width: 100%;
-    background: linear-gradient(180deg, ${colors.black['900']} 1.77%, ${colors.black['600']} 100%);
+    background: linear-gradient(180deg, ${colors.black['900']}, ${colors.black['600']} 100%);
     font-family: "Kanit-Light";
     font-size: 16px;
     color: ${colors.gray['300']};

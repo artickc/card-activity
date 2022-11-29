@@ -2,7 +2,10 @@ import {
     FAILED_TRANSACTION_DELAY,
     SUCCESSFUL_TRANSACTION_DELAY,
 } from '../../../constants/commons';
-import { Status, TransactionStatus } from '../../TransactionStatus';
+import {
+    Status,
+    TransactionStatus,
+} from '../../transactionStatus/TransactionStatus';
 import { useContext, useEffect, useState } from 'react';
 
 import { Button } from '../../button/Button';
@@ -16,7 +19,6 @@ import { colors } from '../../../constants/colors';
 import { formatValue } from '../../../utils/formatValue';
 import keyIcon from './../../../assets/icons/key-icon.svg';
 import logo from '../../../assets/icons/lake-logo.svg';
-import styled from 'styled-components';
 import { useClaimTokensTransaction } from '../../../hooks/use-claim-tokens-transaction';
 
 interface Props {
@@ -88,7 +90,7 @@ export const Withdraw = ({ data, isLoading, refresh }: Props) => {
                         account ? '' : 'blur-sm'
                     }`}
                 >
-                    <div className="w-full flex justify-center font-kanit-medium color-gray-gradient text-shadow text-lg tracking-[.12em]">
+                    <div className="w-full flex justify-center font-kanit-medium color-gray-gradient text-shadow text-base tracking-[.12em]">
                         WITHDRAW
                     </div>
                     {isLoading ? (
@@ -122,11 +124,11 @@ export const Withdraw = ({ data, isLoading, refresh }: Props) => {
                                                 .slice(1)}
                                         </span>
                                     </div>
-                                    <span className="text-sm tracking-[.1em] mt-1">
+                                    <span className="text-sm tracking-[.1em] mt-1 text-center">
                                         TOTAL LOCKED
                                     </span>
                                 </div>
-                                <Line />
+                                <div className="w-full h-[0.5px] bg-gray-700 my-6"></div>
                                 <div className="flex items-center justify-center">
                                     <img
                                         className="w-[3rem] h-[3rem] mr-2"
@@ -134,13 +136,13 @@ export const Withdraw = ({ data, isLoading, refresh }: Props) => {
                                         alt="logo"
                                     ></img>
                                     <div className="flex flex-col">
-                                        <div className="flex items-end">
+                                        <div className="flex items-end tracking-[.1em]">
                                             <span
                                                 className={`${
                                                     totalLocked >= 10 ** 6
                                                         ? 'text-2xl'
                                                         : 'text-4xl'
-                                                } tracking-[.1em] color-gradient`}
+                                                }  color-gradient-start`}
                                             >
                                                 {formatValue(
                                                     Math.trunc(totalUnlocked),
@@ -148,7 +150,7 @@ export const Withdraw = ({ data, isLoading, refresh }: Props) => {
                                                     0,
                                                 )}
                                             </span>
-                                            <span className="tracking-[.1em] color-gradient">
+                                            <span className="color-gradient-end">
                                                 {Math.abs(
                                                     totalUnlocked -
                                                         Math.trunc(
@@ -159,7 +161,7 @@ export const Withdraw = ({ data, isLoading, refresh }: Props) => {
                                                     .slice(1)}
                                             </span>
                                         </div>
-                                        <span className="text-sm tracking-[.1em] text-gray-600">
+                                        <span className="text-sm tracking-[.1em] color-gray-gradient text-shadow">
                                             TOTAL UNLOCKED
                                         </span>
                                     </div>
@@ -221,10 +223,3 @@ export const Withdraw = ({ data, isLoading, refresh }: Props) => {
         </>
     );
 };
-
-const Line = styled.div`
-    background: ${colors.gray['700']};
-    width: 100%;
-    height: 0.5px;
-    margin: 1.5rem 0;
-`;

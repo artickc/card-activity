@@ -10,16 +10,20 @@ interface Props {
 }
 
 export const ButtonBase = ({ size, disabled, children, onClick }: Props) => (
-    <button disabled={disabled} onClick={onClick}>
+    <button
+        className={`${
+            disabled ? '' : 'hover:scale-105 cursor-pointer'
+        } transition-transform duration-300`}
+        disabled={disabled}
+        onClick={onClick}
+    >
         <GradientBorder
             className={`${
                 size === 'small'
-                    ? 'min-w-[11rem] h-[3rem]'
+                    ? 'min-w-[11rem] h-[2.5rem]'
                     : size === 'medium'
                     ? 'min-w-[13rem] h-[3rem]'
-                    : size === 'big'
-                    ? 'min-w-[16rem] h-[4rem]'
-                    : 'min-w-[18rem] h-[6rem] rounded-[44px]'
+                    : 'min-w-[18rem] h-[5.5rem] !rounded-[80px]'
             } p-px flex justify-center items-center rounded-[32px]`}
         >
             <div
@@ -28,9 +32,7 @@ export const ButtonBase = ({ size, disabled, children, onClick }: Props) => (
                         ? 'px-2'
                         : size === 'medium'
                         ? 'px-4'
-                        : size === 'big'
-                        ? 'px-6'
-                        : 'px-6 rounded-[44px]'
+                        : 'px-6 !rounded-[80px]'
                 }`}
             >
                 {children}

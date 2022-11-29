@@ -59,11 +59,11 @@ export const Navigation = () => {
     };
 
     return (
-        <nav className="relative flex flex-wrap items-center justify-between px-8 py-2 bg-black-500">
+        <nav className="relative flex flex-wrap items-center justify-between py-3">
             <div className="w-full flex flex-wrap items-center justify-between">
                 <div>
                     <img
-                        className="w-[24rem] pl-8"
+                        className="w-[18rem]"
                         src={horizontalLogo}
                         alt="logo"
                     ></img>
@@ -73,7 +73,7 @@ export const Navigation = () => {
                     {account ? (
                         <>
                             <Button
-                                size="big"
+                                size="medium"
                                 disabled={true}
                                 text={`${formatValue(
                                     lakeBalance,
@@ -86,29 +86,32 @@ export const Navigation = () => {
                                 )}`}
                             ></Button>
 
-                            <div className="ml-6">
-                                <ButtonWithIcon
-                                    size="big"
-                                    disabled={true}
-                                    text={formatAddress(account)}
-                                >
-                                    <CopyToClipboard text={account}>
+                            <div className="ml-4">
+                                <CopyToClipboard text={account}>
+                                    <ButtonWithIcon
+                                        size="medium"
+                                        disabled={false}
+                                        text={formatAddress(account)}
+                                    >
                                         <img
                                             className="cursor-pointer"
                                             src={copyIcon}
                                             alt="copy"
                                         ></img>
-                                    </CopyToClipboard>
-                                </ButtonWithIcon>
+                                    </ButtonWithIcon>
+                                </CopyToClipboard>
                             </div>
-                            <div className="ml-6">
-                                <button onClick={deactivate}>
+                            <div className="ml-4">
+                                <button
+                                    className="hover:scale-105 cursor-pointer transition-transform duration-300"
+                                    onClick={deactivate}
+                                >
                                     <GradientBorder className="p-px flex justify-center items-center rounded-[32px]">
                                         <div className="w-full h-full flex justify-center items-center rounded-[32px] bg-black-500 p-2">
                                             <img
                                                 className="cursor-pointer"
                                                 src={cancelIcon}
-                                                alt="copy"
+                                                alt="cancel"
                                             ></img>
                                         </div>
                                     </GradientBorder>
@@ -117,7 +120,7 @@ export const Navigation = () => {
                         </>
                     ) : (
                         <GradientButtonWithIcon
-                            size="big"
+                            size="medium"
                             disabled={false}
                             text="CONNECT WALLET"
                             onClick={activate}

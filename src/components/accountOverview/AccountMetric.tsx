@@ -4,7 +4,7 @@ import { formatValue } from '../../utils/formatValue';
 interface Props {
     title: string;
     value: number;
-    icon: ReactNode;
+    iconSrc: string;
     showDecimals: boolean;
     usdValue?: number;
     fontColor?: string;
@@ -13,17 +13,23 @@ interface Props {
 export const AccountMetric = ({
     fontColor,
     title,
-    icon,
+    iconSrc,
     value,
     usdValue,
     showDecimals,
 }: Props) => {
     return (
-        <div className="w-full h-[6rem] flex justify-between pr-8 bg-black-700 rounded-[20px] inset-shadow">
-            <div className="flex items-center justify-center px-4">{icon}</div>
+        <div className="w-full h-[5.75rem] flex justify-between pr-8 bg-black-700 rounded-[20px] inset-shadow overflow-auto">
+            <div className="min-w-[3rem] flex items-center justify-center mx-3">
+                <img
+                    className="w-[3rem] h-[3rem]"
+                    src={iconSrc}
+                    alt="icon"
+                ></img>
+            </div>
             <div className="w-full flex items-center justify-between">
                 <span
-                    className={`max-w-[5.5rem] whitespace-wrap text-sm tracking-[.1em] text-center ${fontColor} mr-2`}
+                    className={`w-[4rem] whitespace-wrap text-sm leading-5 text-center ${fontColor} mr-2`}
                 >
                     {title}
                 </span>
@@ -32,8 +38,13 @@ export const AccountMetric = ({
                         <div className="flex items-end">
                             <span
                                 className={`${
-                                    value >= 10 ** 6 ? 'text-base' : 'text-3xl'
-                                } tracking-[.1em] color-gradient`}
+                                    value >= 10 ** 6 ? 'text-xl' : 'text-3xl'
+                                } ${
+                                    fontColor ||
+                                    (showDecimals
+                                        ? 'color-gradient-start'
+                                        : 'color-gradient')
+                                } font-medium font-kanit-medium`}
                             >
                                 {formatValue(Math.trunc(value), '', 0)}
                             </span>
@@ -41,9 +52,11 @@ export const AccountMetric = ({
                                 <span
                                     className={`${
                                         value >= 10 ** 6
-                                            ? 'text-xs'
+                                            ? 'text-sm'
                                             : 'text-base'
-                                    } tracking-[.1em] color-gradient`}
+                                    }  ${
+                                        fontColor || 'color-gradient-end'
+                                    } font-medium font-kanit-medium`}
                                 >
                                     {Math.abs(value - Math.trunc(value))
                                         .toFixed(2)
@@ -52,8 +65,8 @@ export const AccountMetric = ({
                             )}
                         </div>
                         {!!usdValue && (
-                            <span className="text-xs tracking-[.1em] text-gray-600 text-end">
-                                {`( `}
+                            <span className="text-xs tracking-[.1em] text-gray-500 text-end">
+                                {`( ~`}
                                 {formatValue(usdValue, '$', 2)}
                                 {` )`}
                             </span>

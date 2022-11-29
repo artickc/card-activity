@@ -25,14 +25,14 @@ export const VestingSchedule = ({ data, isLoading }: Props) => {
                     account ? '' : 'blur-sm'
                 }`}
             >
-                <div className="w-full flex justify-start py-10 px-6">
+                <div className="w-full flex justify-start py-12 px-6">
                     <div className="font-kanit-medium color-gray-gradient text-shadow text-xl tracking-[.12em]">
                         YOUR $LAKE VESTING SCHEDULE
                     </div>
                 </div>
-                <div className="w-full flex flex-col items-center overflow-auto">
+                <div className="w-full overflow-auto">
                     {isLoading ? (
-                        <div className="my-24">
+                        <div className="w-full flex my-24 justify-center">
                             <ClipLoader color={colors.gray['300']} loading />
                         </div>
                     ) : (

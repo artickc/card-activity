@@ -1,24 +1,13 @@
 import { Navigation } from '../navigation/Navigation';
 import { ReactNode } from 'react';
-import styled from 'styled-components';
 
 interface Props {
     children: ReactNode;
 }
 
 export const Page = ({ children }: Props) => (
-    <PageContainer>
+    <div className="w-full max-w-[1536px] h-full min-h-screen overflow-y-scroll overflow-x-hidden m-auto relative px-6 xl:px-28">
         <Navigation />
         {children}
-    </PageContainer>
+    </div>
 );
-
-const PageContainer = styled.div`
-    position: relative;
-    width: 100vw;
-    max-width: 100vw;
-    min-height: 100vh;
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-`;

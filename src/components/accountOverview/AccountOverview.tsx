@@ -9,14 +9,12 @@ import { JsonRpcProvider } from '@ethersproject/providers';
 import { ProgressChart } from './progressChart/ProgressChart';
 import { REFRESH_LAKE_PRICE_INTERVAL } from '../../constants/commons';
 import { WalletConnectContext } from '../../context';
-import { colors } from '../../constants/colors';
 import dropIcon from '../../assets/icons/drop-icon.svg';
 import { formatVestingScheduleData } from '../../utils/formatVestingScheduleData';
 import keyIcon from '../../assets/icons/key-icon.svg';
 import lockClosedIcon from '../../assets/icons/lock-closed-icon.svg';
 import lockOpenIcon from '../../assets/icons/lock-open-icon.svg';
 import { parseBigNumber } from '../../utils/parseBigNumber';
-import styled from 'styled-components';
 import { useBeneficiaryOverview } from '../../hooks/use-beneficiary-overview';
 import { useConfig } from '../../hooks/use-config';
 import { useLakePrice } from '../../hooks/use-lake-price';
@@ -110,58 +108,41 @@ export const AccountOverview = () => {
     };
 
     return (
-        <div className="w-full h-full bg-black-800 rounded-[30px] inset-shadow relative">
+        <div className="w-full h-full bg-black-800 rounded-[42px] inset-shadow relative">
             <div
-                className={`w-full h-full flex flex-col items-center px-16 py-8 ${
+                className={`w-full h-full flex flex-col items-center px-16 py-10 ${
                     account ? '' : 'blur-sm'
                 }`}
             >
-                <div className="w-full font-kanit-medium color-gray-gradient text-shadow text-3xl tracking-[.12em] mb-8">
+                <div className="w-full font-kanit-medium color-gray-gradient text-shadow text-3xl tracking-[.12em] mb-7">
                     YOUR ACCOUNT
                 </div>
-                <StatContainer>
+                <div className="w-full h-full flex items-center justify-center bg-black-600 rounded-[28px] box-shadow mb-5">
                     <div className="w-1/2 h-full mx-4 flex justify-center pl-2 pt-10">
                         <ProgressChart
                             unlocked={(totalUnlocked * 100) / totalAllocated}
                             locked={(totalLocked * 100) / totalAllocated}
                         />
                     </div>
-                    <div className="w-1/2 h-full flex flex-col mx-4 py-4 justify-between">
+                    <div className="w-1/2 h-full flex flex-col ml-3 mr-5 py-4 justify-between">
                         <AccountMetric
                             title={'LOCKED $LAKE'}
-                            icon={
-                                <img
-                                    className="w-[3.5rem] h-[3.5rem]"
-                                    src={lockClosedIcon}
-                                    alt="icon"
-                                ></img>
-                            }
+                            iconSrc={lockClosedIcon}
                             value={totalLocked}
                             usdValue={totalLocked * lakePrice}
                             showDecimals={true}
+                            fontColor={'text-gray-500'}
                         />
                         <AccountMetric
                             title={'UNLOCKED $LAKE'}
-                            icon={
-                                <img
-                                    className="w-[3.5rem] h-[3.5rem]"
-                                    src={lockOpenIcon}
-                                    alt="icon"
-                                ></img>
-                            }
+                            iconSrc={lockOpenIcon}
                             value={totalUnlocked}
                             usdValue={totalUnlocked * lakePrice}
                             showDecimals={true}
                         />
                         <AccountMetric
                             title={'TOTAL $LAKE'}
-                            icon={
-                                <img
-                                    className="w-[3.5rem] h-[3.5rem]"
-                                    src={lockOpenIcon}
-                                    alt="icon"
-                                ></img>
-                            }
+                            iconSrc={lockOpenIcon}
                             value={totalLocked + totalUnlocked + lakeBalance}
                             usdValue={
                                 (totalLocked + totalUnlocked + lakeBalance) *
@@ -171,18 +152,12 @@ export const AccountOverview = () => {
                         />
                         <AccountMetric
                             title={'ACTIVE LP POSITIONS'}
-                            icon={
-                                <img
-                                    className="w-[3.5rem] h-[3.5rem]"
-                                    src={dropIcon}
-                                    alt="icon"
-                                ></img>
-                            }
+                            iconSrc={dropIcon}
                             value={positionsCount}
                             showDecimals={false}
                         />
                     </div>
-                </StatContainer>
+                </div>
             </div>
             {!account && (
                 <div className="absolute top-[50%] left-[37%]">
@@ -199,15 +174,3 @@ export const AccountOverview = () => {
         </div>
     );
 };
-
-const StatContainer = styled.div`
-    box-shadow: inset 1px 1px 1px rgba(68, 68, 68, 0.05),
-        inset -1px -1px 4px rgba(134, 134, 134, 0.12);
-    border-radius: 20px;
-    background: ${colors.black[600]};
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;

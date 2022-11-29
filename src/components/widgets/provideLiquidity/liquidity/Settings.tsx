@@ -1,6 +1,4 @@
 import { PriceRange } from './PriceRange';
-import { colors } from '../../../../constants/colors';
-import styled from 'styled-components';
 
 type Props = {
     isRangeVisible: boolean;
@@ -36,7 +34,7 @@ export const Settings = ({
     onFullRangeClick,
 }: Props) => {
     return (
-        <SettingsContainer className="w-full flex flex-col p-4 my-4 font-kanit-medium whitespace-nowrap text-xs">
+        <div className="w-full flex flex-col bg-black-600 rounded-[20px] p-4 my-4 font-kanit-medium whitespace-nowrap text-xs box-shadow">
             {isRangeVisible && (
                 <PriceRange
                     tickLower={tickLower!}
@@ -80,13 +78,6 @@ export const Settings = ({
                     </div>
                 </div>
             </div>
-        </SettingsContainer>
+        </div>
     );
 };
-
-const SettingsContainer = styled.div`
-    box-shadow: inset 1px 1px 1px rgba(68, 68, 68, 0.05),
-        inset -1px -1px 4px rgba(134, 134, 134, 0.12);
-    border-radius: 20px;
-    background: ${colors.black[600]};
-`;

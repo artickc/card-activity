@@ -1,29 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { ASSET_LAKE } from '../../constants/assets';
+import { Button } from '../button/Button';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { GradientButtonWithIcon } from '../button/gradient/GradientButtonWithIcon';
 import { JsonRpcProvider } from '@ethersproject/providers';
+import { LakeStats } from '../../interfaces/lakeStat.interface';
 import { REFRESH_STATS_INTERVAL } from '../../constants/commons';
 import { StatElement } from './StatElement';
 import { WalletConnectContext } from '../../context';
-import { colors } from '../../constants/colors';
 import { formatValue } from '../../utils/formatValue';
 import metamaskIcon from './../../assets/icons/metamask-icon.svg';
-import styled from 'styled-components';
 import { useConfig } from '../../hooks/use-config';
 import { useLakeStats } from '../../hooks/use-lake-stats';
-
-export interface LakeStats {
-    marketCup: number;
-    pastMarketCup: number;
-    circulationSupply: number;
-    pastCirculationSupply: number;
-    lakePrice: number;
-    pastLakePrice: number;
-    consentsGathered: number;
-    pastConsentsGathered: number;
-}
 
 const zeroStats = {
     marketCup: 0,
@@ -74,11 +63,11 @@ export const Stats = () => {
         }
     };
     return (
-        <div className="w-full h-full flex flex-col items-center justify-between bg-black-800 rounded-[30px] inset-shadow px-8 py-6">
-            <div className="font-kanit-medium color-gray-gradient text-shadow text-2xl tracking-[.12em]">
+        <div className="w-full h-full flex flex-col items-center justify-between bg-black-800 rounded-[42px] inset-shadow px-8 py-6">
+            <div className="font-kanit-medium color-gray-gradient text-shadow text-xl tracking-[.12em] pt-2 pb-4">
                 $LAKE STATS
             </div>
-            <div className="w-full flex flex-col items-center justify-center">
+            <div className="w-full h-full flex flex-col items-center justify-between">
                 <StatElement
                     title={'MARKET CAP'}
                     currentValue={lakeStats.marketCup}
@@ -108,35 +97,30 @@ export const Stats = () => {
                     )}
                 />
             </div>
-            <div className="w-full flex flex-col items-center justify-center px-4">
-                <div className="mb-6">
+            <div className="w-full flex flex-col items-center justify-center px-4 pt-8">
+                <div className="mb-5">
                     <GradientButtonWithIcon
                         size="medium"
                         disabled={false}
                         text="ADD TO METAMASK"
                         onClick={addToMetamask}
                     >
-                        <img src={metamaskIcon} alt="metamask"></img>
+                        <img
+                            src={metamaskIcon}
+                            alt="metamask"
+                            className="w-[2rem] h-[2rem]"
+                        ></img>
                     </GradientButtonWithIcon>
                 </div>
 
                 <CopyToClipboard text={lakeAddress}>
-                    <GradientBorder className="min-w-[14rem] h-[2.5rem] p-px flex justify-center items-center rounded-[32px] cursor-pointer">
-                        <div className="w-full h-full flex justify-center items-center rounded-[32px] bg-black-500 px-4">
-                            <span className="color-gradient-light tracking-wider text-xs font-medium font-kanit-medium">
-                                COPY CONTRACT ADDRESS
-                            </span>
-                        </div>
-                    </GradientBorder>
+                    <Button
+                        size="medium"
+                        disabled={false}
+                        text={'COPY CONTRACT ADDRESS'}
+                    ></Button>
                 </CopyToClipboard>
             </div>
         </div>
     );
 };
-
-const GradientBorder = styled.div`
-    background: linear-gradient(${colors.purple['300']}, ${colors.blue['300']});
-    box-shadow: inset 1px 1px 7px rgba(255, 255, 255, 0.46);
-    filter: drop-shadow(0px 0px 3px ${colors.purple['600']})
-        drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
-`;

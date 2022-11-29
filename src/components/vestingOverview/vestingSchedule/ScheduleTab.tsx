@@ -161,10 +161,10 @@ export const ScheduleTab = ({ data }: Props) => {
                                             } ${
                                                 !row.getValue('isUnlocked')
                                                     ? 'text-gray-500'
-                                                    : ''
+                                                    : 'color-gray-gradient text-shadow'
                                             }`}
                                         >
-                                            <div className="flex flex-col m-4">
+                                            <div className="flex flex-col m-4 font-kanit-regular">
                                                 {flexRender(
                                                     cell.column.columnDef.cell,
                                                     cell.getContext(),
