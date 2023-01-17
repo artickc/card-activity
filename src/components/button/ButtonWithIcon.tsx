@@ -21,7 +21,7 @@ export const ButtonWithIcon = ({
         <div className="w-full flex justify-between">
             {children}
             <span
-                className={`color-gradient-light tracking-[.05em] font-medium font-kanit-medium ml-1 sm:ml-2 ${
+                className={`color-gradient-light tracking-[.05em] font-medium font-kanit-medium ml-1 lg:ml-2 ${
                     size === 'small'
                         ? 'text-xs'
                         : size === 'medium'

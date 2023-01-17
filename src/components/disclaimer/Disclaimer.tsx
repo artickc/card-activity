@@ -23,7 +23,7 @@ export const Disclaimer = ({ onAcceptClick }: Props) => {
     return (
         <div className="w-full h-[100vh]">
             <div className="w-full h-full z-40 fixed flex items-center justify-center">
-                <div className="w-[30rem] sm:h-[25rem] flex justify-between p-8 bg-black-800 rounded-[20px] inset-shadow overflow-auto">
+                <div className="w-[30rem] lg:h-[25rem] flex justify-between p-8 bg-black-800 rounded-[20px] inset-shadow overflow-auto">
                     <div className="w-full flex flex-col items-center justify-between">
                         <div className="w-full flex items-center justify-between">
                             <ToggleButton

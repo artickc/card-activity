@@ -32,11 +32,11 @@ export const Main = () => {
             {isDisclaimerAccepted && (
                 <Page>
                     <div className="w-full flex flex-col items-center justify-center">
-                        <div className="w-full h-[1480px] sm:h-[670px] flex flex-col sm:flex-row justify-between py-6">
-                            <div className="w-full sm:w-[66%]">
+                        <div className="w-full h-full lg:h-[670px] flex flex-col lg:flex-row justify-between py-6">
+                            <div className="w-full lg:w-[66%]">
                                 <AccountOverview />
                             </div>
-                            <div className="w-full sm:w-[31%]">
+                            <div className="w-full lg:w-[31%] mt-4 lg:mt-0">
                                 <Stats />
                             </div>
                         </div>
